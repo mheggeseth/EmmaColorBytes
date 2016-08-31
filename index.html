@@ -17,6 +17,7 @@
         crossorigin="anonymous">
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.2/js.cookie.min.js"></script>
 </head>
 
 <body data-bind="style: { backgroundColor: bgColor }">
@@ -25,9 +26,12 @@
     </div>
     <script>
         function EmmaColorBytes() {
-            var initial = 0;
+            var initial = parseInt(Cookies.get("count") || 0);
             
             this.count = ko.observable(initial);
+            this.count.subscribe(function(newCount) { 
+                Cookies.set("count", newCount);
+            });
             this.bgColor = ko.computed(function() {
                 return "#" + ("000000" + this.count().toString(16)).slice(-6); //6 digits
             }.bind(this));
