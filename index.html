@@ -16,8 +16,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
         crossorigin="anonymous">
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.2/js.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.2/js.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spark-md5/3.0.0/spark-md5.min.js"></script>
 </head>
 
 <body data-bind="style: { backgroundColor: bgColor }">
@@ -33,7 +34,7 @@
                 Cookies.set("count", newCount);
             });
             this.bgColor = ko.computed(function() {
-                return "#" + Math.round(this.count()*Math.random()*Math.pow(16,6)%Math.pow(16,6)).toString(16);
+                return "#" + SparkMD5.hash(this.count()).slice(-6);
             }.bind(this));
             this.increment = function() {
                 this.count(this.count() + 1);
