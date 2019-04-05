@@ -34,7 +34,7 @@
                 Cookies.set("count", newCount);
             });
             this.bgColor = ko.computed(function() {
-                return "#" + SparkMD5.hash(this.count()).slice(-6);
+                return "#" + SparkMD5.hash(""+this.count()).slice(-6);
             }.bind(this));
             this.increment = function() {
                 this.count(this.count() + 1);
