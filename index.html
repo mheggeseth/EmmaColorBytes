@@ -33,7 +33,7 @@
                 Cookies.set("count", newCount);
             });
             this.bgColor = ko.computed(function() {
-                return "#" + ("000" + (this.count()%4096).toString(16)).slice(-3); //3 digit hex color
+                return "#" + Math.round(this.count()*Math.random()*Math.pow(16,6)%Math.pow(16,6)).toString(16);
             }.bind(this));
             this.increment = function() {
                 this.count(this.count() + 1);
