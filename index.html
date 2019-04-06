@@ -19,6 +19,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.2/js.cookie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/spark-md5/3.0.0/spark-md5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
 </head>
 
 <body data-bind="style: { backgroundColor: bgColor }">
@@ -36,9 +37,9 @@
             this.bgColor = ko.computed(function() {
                 return "#" + SparkMD5.hash(""+this.count()).slice(-6);
             }.bind(this));
-            this.increment = function() {
+            this.increment = _.throttle(function() {
                 this.count(this.count() + 1);
-            };
+            }.bind(this), 5000, { trailing: false });
         }
         ko.applyBindings(new EmmaColorBytes());
     </script>
